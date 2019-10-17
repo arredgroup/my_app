@@ -18,7 +18,14 @@
                     <td>{{ $boleta->numero }}</td>
                     <td>{{ $boleta->fecha }}</td>
                     <td>{{ $boleta->monto }}</td>
-                    <td><a href="{{ route('boletas.modificar', [$boleta]) }}">Editar</a></td>
+                    <td>
+                        <a href="{{ route('boletas.modificar', [$boleta]) }}">Editar</a>
+                        <form action="{{ route('boletas.eliminar', [$boleta]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-link">Eliminar</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

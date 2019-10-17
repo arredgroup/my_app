@@ -21,6 +21,7 @@ Route::prefix('boletas')->name('boletas.')->group(function(){
     Route::post('/nuevo', 'BoletaController@guardar')->name('guardar');
     Route::get('/{boleta}/modificar', 'BoletaController@modificar')->name('modificar');
     Route::put('/{boleta}/modificar', 'BoletaController@actualizar');
+    Route::delete('/{boleta}/eliminar', 'BoletaController@eliminar')->name('eliminar');
 });
 
 

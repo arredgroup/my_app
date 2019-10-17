@@ -65,5 +65,14 @@ class BoletaController extends Controller
         return view('boletas.editar')->with('boleta', $b);
     }
 
+    public function eliminar(Request $r, Boleta $b){
+        if($b->delete()){
+            Session::flash('danger', 'BOLETA eliminada');
+            return redirect()->route('boletas.index');
+        }else{
+            Session::flash('warning', 'BOLETA no se puede eliminar');
+            return redirect()->back();
+        }
+    }
 
 }
