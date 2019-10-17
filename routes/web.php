@@ -19,6 +19,8 @@ Route::prefix('boletas')->name('boletas.')->group(function(){
     Route::get('/', 'BoletaController@index')->name('index');
     Route::get('/nuevo', 'BoletaController@nuevo')->name('crear');
     Route::post('/nuevo', 'BoletaController@guardar')->name('guardar');
+    Route::get('/{boleta}/modificar', 'BoletaController@modificar')->name('modificar');
+    Route::put('/{boleta}/modificar', 'BoletaController@actualizar');
 });
 
 
@@ -26,8 +28,8 @@ Route::prefix('productos')->name('productos.')->group(function(){
     Route::get('/', 'ProductoController@index')->name('index');
     Route::get('/nuevo', 'ProductoController@nuevo')->name('crear');
     Route::post('/nuevo', 'ProductoController@guardar')->name('guardar');
-    Route::get('/{producto}/modificar', 'ProductoController@modificar');
-    Route::post('/{producto}/actualizar', 'ProductoController@actualizar');
+    Route::get('/{producto}/modificar', 'ProductoController@modificar')->name('modificar');
+    Route::put('/{producto}/modificar', 'ProductoController@actualizar');
 });
 
 Route::prefix('facturas')->name('facturas.')->group(function(){

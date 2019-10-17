@@ -9,6 +9,7 @@
                 <th>Id</th>
                 <th>Fecha</th>
                 <th>Monto</th>
+                <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
@@ -17,6 +18,7 @@
                     <td>{{ $boleta->numero }}</td>
                     <td>{{ $boleta->fecha }}</td>
                     <td>{{ $boleta->monto }}</td>
+                    <td><a href="{{ route('boletas.modificar', [$boleta]) }}">Editar</a></td>
                 </tr>
             @endforeach
             </tbody>

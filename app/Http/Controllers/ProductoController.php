@@ -47,7 +47,7 @@ class ProductoController extends Controller
             return redirect()->back();
         }
         Session::flash('success', 'Producto actualizado');
-        return redirect()->back();
+        return redirect()->route('productos.index');
 
     }
 
@@ -61,7 +61,7 @@ class ProductoController extends Controller
     }
 
     public function modificar(Producto $p){
-        //FORMULARIO DE MODIFICAR
+        return view('productos.editar')->with('producto', $p);
     }
 
 

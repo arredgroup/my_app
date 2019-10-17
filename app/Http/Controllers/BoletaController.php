@@ -20,14 +20,49 @@ class BoletaController extends Controller
     }
 
     public function guardar(Request $request){
+        $this->validate($request, [
+           'fecha' => 'required|date',
+           'monto' => 'required|numeric'
+        ]);
 
         $bol = new Boleta();
-        $bol->lr_bol_fecha = Carbon::createFromFormat('d/m/Y', $request->fecha);
-        $bol->total = $request->monto;
-        $bol->save();
+        $bol->fecha = Carbon::createFromFormat('d/m/Y', $request->fecha);
+        $bol->monto = $request->monto;
+        if(!$bol->save()){
+            $request->session()->flash('danger', 'No se pudo crear la Boleta');
+            //Session::flash('danger', 'No se pudo crear el Producto');
+            return redirect()->back();
+        }
+        Session::flash('success', 'Boleta ingresada');
+        return redirect()->route('boletas.index');
+    }
 
-        return redirect('/');
+    public function actualizar(Request $request, Boleta $b){
+        $this->validate($request, [
+            'fecha' => 'date_format:d/m/Y',
+            'monto' => 'numeric'
+        ]);
 
+        if($request->fecha === null && $request->monto===null){
+            Session::flash('warning', 'Nada que actualizar');
+            return redirect()->back();
+        }
+        if($request->fecha != null && $request->fecha!= $b->fecha)
+            $b->fecha = Carbon::createFromFormat('d/m/Y', $request->fecha);
+        if($request->monto != null && $request->monto!= $b->monto)
+            $b->monto = $request->monto;
+
+        if(!$b->save()){
+            $request->session()->flash('danger', 'No se pudo actualizar la boleta');
+            return redirect()->back();
+        }
+        Session::flash('success', 'Boleta actualizada');
+        return redirect()->route('boletas.index');
+
+    }
+
+    public function modificar(Boleta $b){
+        return view('boletas.editar')->with('boleta', $b);
     }
 
 

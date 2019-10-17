@@ -36,4 +36,8 @@ class Boleta extends Model  {
         return $this->lr_bol_numero;
     }
 
+    public function getRouteKeyName(){
+        return 'lr_bol_numero';
+    }
+
 }
